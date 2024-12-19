@@ -32,6 +32,7 @@ namespace SajatOldalProba.Models
             Transmissions = new List<double>();
             Speed_of_the_Wheels = new List<double>();
             Force_of_the_Wheels = new List<double>();
+            AirResistances = new List<double>();    
         }
         public double Wheel_radius { get; set; }
 
@@ -116,7 +117,25 @@ namespace SajatOldalProba.Models
             Calculate_the_hill();
             Ascent_resistance = Max_Weight * G  * Math.Sin(The_hill_on_degree * Math.PI / 180);
         }
-
+        public List<double> AirResistances { get; set; }
+        public double AirDensity { get; set; }
+        public double Cross_Section { get; set; }
+        public void Calculate_Cross_Section()
+        {
+            Cross_Section = 0.78 * Hight * Width/1000/1000;
+        }
+        public double Calculate_AirResistance(double speed_of_the_wheels)
+        {
+            return 0.5 * Cross_Section * Drag_coefficient * AirDensity * (speed_of_the_wheels*speed_of_the_wheels);
+        }
+        public void Calculate_AirResistanceses()
+        {
+            for (int i = 0; i < Speed_of_the_Wheels.Count; i++)
+            {
+                var Ar = Calculate_AirResistance(Speed_of_the_Wheels[i]);
+                AirResistances.Add(Ar);
+            }
+        }
 
     }
 }
