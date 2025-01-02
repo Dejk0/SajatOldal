@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "Motorok";
+}
+
+<h1>Mik a bemeneti paraméterek?</h1>
+
+
+<form asp-controller="Motorok" asp-action="SubmitMotorok" method="post">
+    <div style="overflow-y: auto; max-height: 80vh;">
+    <table>
+        <thead>
+            <tr>
+                <th>Paraméter</th>
+                <th>Érték</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pn max (kW)</td>
+                    <td><input type="text" name="Pn_max" value="92" /></td>
+            </tr>
+            <tr>
+                <td>n Pmax (1/min)</td>
+                    <td><input type="text" name="n_pn_max" value="5800" /></td>
+            </tr>
+            <tr>
+                <td>Mmax (kW)</td>
+                    <td><input type="text" name="M_max" value="182" /></td>
+            </tr>
+            <tr>
+                <td>m Mmax (1/min)</td>
+                    <td><input type="text" name="n_M_max" value="3500" /></td>
+            </tr>
+            <tr>
+                <td>Öntömeg (kg)</td>
+                    <td><input type="text" name="Weight" value="1365" /></td>
+            </tr>
+            <tr>
+                <td>Maxtömeg (kg)</td>
+                    <td><input type="text" name="Max_Weight" value="1850" /></td>
+            </tr>
+            <tr>
+                <td>1.fokozat (-)</td>
+                <td><input type="text" name="1." value="3,89"/></td>
+            </tr>
+            <tr>
+                <td>2.fokozat (-)</td>
+                <td><input type="text" name="2." value="2,084" /></td>
+            </tr>
+            <tr>
+                <td>3.fokozat (-)</td>
+                <td><input type="text" name="3." value="1,342"/></td>
+            </tr>
+            <tr>
+                <td>4.fokozat (-)</td>
+                <td><input type="text" name="4." value="1,0" /></td>
+            </tr>
+            <tr>
+                <td>5.fokozat (-)</td>
+                <td><input type="text" name="5." value="0,822" /></td>
+            </tr>
+            <tr>
+                <td>6.fokozat (-)</td>
+                <td><input type="text" name="6." value="" /></td>
+            </tr>
+            <tr>
+                <td>Állandó áttétel (-)</td>
+                    <td><input type="text" name="Gear_ratio" value="3,92" /></td>
+            </tr>
+            <tr>
+                <td>Járműhossz (mm)</td>
+                    <td><input type="text" name="Length" value="4744" /></td>
+            </tr>
+            <tr>
+                <td>Szélesség (mm)</td>
+                    <td><input type="text" name="Width" value="1760" /></td>
+            </tr>
+            <tr>
+                <td>Magasság (mm)</td>
+                    <td><input type="text" name="Hight" value="1440" /></td>
+            </tr>
+            <tr>
+                <td>Tengelytáv (mm)</td>
+                    <td><input type="text" name="Wheelbase" value="2761" /></td>
+            </tr>
+            <tr>
+                <td>Nyomtáv (mm)</td>
+                    <td><input type="text" name="Gauge" value="1477" /></td>
+            </tr>
+            <tr>
+                <td>Gumiabroncs </td>
+                    <td><input type="text" name="Tire" value="195/70 R 15" /></td>
+            </tr>
+            <tr>
+                <td>Légellenállási tényező (-) </td>
+                    <td><input type="text" name="Drag_coefficient" value="0,32" /></td>
+            </tr>
+            <tr>
+                <td>Gördülési ellenállási tényező (-) </td>
+                    <td><input type="text" name="Rolling_Resistance_Factor" value="0,015" /></td>
+            </tr>
+            <tr>
+                <td>Erőátvitel hatásfoka (-) </td>
+                    <td><input type="text" name="Transmission_efficiency" value="0,92" /></td>
+            </tr>
+            <tr>
+                <td>A forgótömegek redukációs állandója (-) </td>
+                    <td><input type="text" name="Reduction_constant_of_rotating_masses" value="1,2" /></td>
+            </tr>
+            <tr>
+                <td>Emelkedő eredeksége (%) </td>
+                    <td><input type="text" name="Slope_of_rise" value="13" /></td>
+            </tr>
+            <tr>
+                <td>Tapadási tényező (-) </td>
+                    <td><input type="text" name="Adhesion_factor" value="0,8" /></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div>
+        <button type="submit">Beküldés</button>
+    </div>
+    </div>
+</form>
