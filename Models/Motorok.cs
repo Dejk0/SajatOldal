@@ -84,19 +84,19 @@ namespace SajatOldalProba.Models
         {
             return (Wheel_radius*2*Math.PI*ford)/(transmission*Gear_ratio);
         }
-        public void Calculate_Speed_of_the_wheels_P(double ford)
+        public void Calculate_Speed_of_the_wheels_P()
         {
             for (int i = 0; i < Transmissions.Count; i++) 
             {
-                var n = Calculate_Speed_of_the_wheel(ford, Transmissions[i]);
+                var n = Calculate_Speed_of_the_wheel(n_pn_max, Transmissions[i]);
                 Speed_of_the_Wheels_P.Add(n);
             }
         }
-        public void Calculate_Speed_of_the_wheels_M(double ford)
+        public void Calculate_Speed_of_the_wheels_M()
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Speed_of_the_wheel(ford, Transmissions[i]);
+                var n = Calculate_Speed_of_the_wheel(n_M_max, Transmissions[i]);
                 Speed_of_the_Wheels_M.Add(n);
             }
         }
@@ -106,19 +106,19 @@ namespace SajatOldalProba.Models
         {
             return (torque*1000*Gear_ratio*transmission*Transmission_efficiency) / (Wheel_radius);
         }
-        public void Calculate_Force_of_the_wheels_P(double torque)
+        public void Calculate_Force_of_the_wheels_P()
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Force_of_the_wheel(torque, Transmissions[i]);
+                var n = Calculate_Force_of_the_wheel(P_M_Max, Transmissions[i]);
                 Force_of_the_Wheels_P.Add(n);
             }
         }
-        public void Calculate_Force_of_the_wheels_M(double torque)
+        public void Calculate_Force_of_the_wheels_M()
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Force_of_the_wheel(torque, Transmissions[i]);
+                var n = Calculate_Force_of_the_wheel(M_max, Transmissions[i]);
                 Force_of_the_Wheels_M.Add(n);
             }
         }
@@ -241,6 +241,27 @@ namespace SajatOldalProba.Models
                 var dyna = Dynamic_Factor(ForcesRequiredForAccelaration_P[i], AirResistances_P[i]);
                 Dynamic_Factors.Add(dyna);
             }
+        }
+        public void Calculate()
+        {
+            Calculate_Wheel_radius();
+            Calculate_M_P_Max();
+            Calculate_P_M_Max();
+            Calculate_Speed_of_the_wheels_P();
+            Calculate_Speed_of_the_wheels_M();
+            Calculate_Force_of_the_wheels_P();
+            Calculate_Force_of_the_wheels_M();
+            Calculate_Rolling_resistance();
+            Calculate_Rolling_resistance_on_a_hill();
+            Calculate_Ascent_resistance();
+            Calculate_Cross_Section();
+            Calculate_AirResistanceses_P();
+            Calculate_AirResistanceses_M();
+            Calculate_Forces_Required_For_Accelaration_P();
+            Calculate_Forces_Required_For_Accelaration_M();
+            Calculate_Acceleration_On_The_Hill_P();
+            Calculate_Acceleration_On_The_Hill_M();
+            Calculate_Dynamic_Factors();
         }
     }
 }
