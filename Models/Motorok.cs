@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Reflection.Metadata;
 using System.Transactions;
 
@@ -30,9 +31,17 @@ namespace SajatOldalProba.Models
         public Motorok()
         {
             Transmissions = new List<double>();
-            Speed_of_the_Wheels = new List<double>();
-            Force_of_the_Wheels = new List<double>();
-            AirResistances = new List<double>();    
+            Speed_of_the_Wheels_P = new List<double>();
+            Speed_of_the_Wheels_M = new List<double>();
+            Force_of_the_Wheels_P = new List<double>();
+            Force_of_the_Wheels_M = new List<double>();
+            AirResistances_P = new List<double>();
+            AirResistances_M = new List<double>();
+            ForcesRequiredForAccelaration_P = new List<double>();
+            ForcesRequiredForAccelaration_M = new List<double>();
+            Accelarations_On_The_Hill_P = new List<double>();
+            Accelarations_On_The_Hill_M = new List<double>();   
+            Dynamic_Factors = new List<double>();   
         }
         public double Wheel_radius { get; set; }
 
@@ -64,7 +73,9 @@ namespace SajatOldalProba.Models
         {
             P_M_Max = M_max * Calculate_ford_to_Radsec(n_pn_max)/1000;
         }
-        public List<double> Speed_of_the_Wheels { get; set; }
+        public List<double> Speed_of_the_Wheels_P { get; set; }
+        public List<double> Speed_of_the_Wheels_M { get; set; }
+
         public double MeterminuteToKmhour(double metersec)
         {
             return metersec / 1000 / 1000 * 60;
@@ -73,25 +84,42 @@ namespace SajatOldalProba.Models
         {
             return (Wheel_radius*2*Math.PI*ford)/(transmission*Gear_ratio);
         }
-        public void Calculate_Speed_of_the_wheels(double ford)
+        public void Calculate_Speed_of_the_wheels_P(double ford)
         {
             for (int i = 0; i < Transmissions.Count; i++) 
             {
                 var n = Calculate_Speed_of_the_wheel(ford, Transmissions[i]);
-                Speed_of_the_Wheels.Add(n);
+                Speed_of_the_Wheels_P.Add(n);
             }
         }
-        public List<double> Force_of_the_Wheels { get; set; }
+        public void Calculate_Speed_of_the_wheels_M(double ford)
+        {
+            for (int i = 0; i < Transmissions.Count; i++)
+            {
+                var n = Calculate_Speed_of_the_wheel(ford, Transmissions[i]);
+                Speed_of_the_Wheels_M.Add(n);
+            }
+        }
+        public List<double> Force_of_the_Wheels_P { get; set; }
+        public List<double> Force_of_the_Wheels_M { get; set; }
         public double Calculate_Force_of_the_wheel(double torque, double transmission)
         {
             return (torque*1000*Gear_ratio*transmission*Transmission_efficiency) / (Wheel_radius);
         }
-        public void Calculate_Force_of_the_wheels(double torque)
+        public void Calculate_Force_of_the_wheels_P(double torque)
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
                 var n = Calculate_Force_of_the_wheel(torque, Transmissions[i]);
-                Force_of_the_Wheels.Add(n);
+                Force_of_the_Wheels_P.Add(n);
+            }
+        }
+        public void Calculate_Force_of_the_wheels_M(double torque)
+        {
+            for (int i = 0; i < Transmissions.Count; i++)
+            {
+                var n = Calculate_Force_of_the_wheel(torque, Transmissions[i]);
+                Force_of_the_Wheels_M.Add(n);
             }
         }
         public double Rolling_resistance { get; set; }
@@ -117,7 +145,8 @@ namespace SajatOldalProba.Models
             Calculate_the_hill();
             Ascent_resistance = Max_Weight * G  * Math.Sin(The_hill_on_degree * Math.PI / 180);
         }
-        public List<double> AirResistances { get; set; }
+        public List<double> AirResistances_P { get; set; }
+        public List<double> AirResistances_M { get; set; }
         public double AirDensity { get; set; }
         public double Cross_Section { get; set; }
         public void Calculate_Cross_Section()
@@ -128,14 +157,90 @@ namespace SajatOldalProba.Models
         {
             return 0.5 * Cross_Section * Drag_coefficient * AirDensity * (speed_of_the_wheels*speed_of_the_wheels);
         }
-        public void Calculate_AirResistanceses()
+        public void Calculate_AirResistanceses_P()
         {
-            for (int i = 0; i < Speed_of_the_Wheels.Count; i++)
+            for (int i = 0; i < Speed_of_the_Wheels_P.Count; i++)
             {
-                var Ar = Calculate_AirResistance(Speed_of_the_Wheels[i]);
-                AirResistances.Add(Ar);
+                var Ar = Calculate_AirResistance(Speed_of_the_Wheels_P[i]);
+                AirResistances_P.Add(Ar);
             }
         }
-
+        public void Calculate_AirResistanceses_M()
+        {
+            for (int i = 0; i < Speed_of_the_Wheels_M.Count; i++)
+            {
+                var Ar = Calculate_AirResistance(Speed_of_the_Wheels_M[i]);
+                AirResistances_M.Add(Ar);
+            }
+        }
+        public List<double> ForcesRequiredForAccelaration_P { get; set; }
+        public List<double> ForcesRequiredForAccelaration_M { get; set; }
+        public double Force_Required_For_Accelaration_P(int gear)
+        {
+            double air_res=AirResistances_P[gear];
+            double roll_ress = Rolling_resistance;
+            double roll_ress_hill = Rolling_resistance_on_a_hill;
+            double force_of_whill = Force_of_the_Wheels_P[gear];
+            return force_of_whill-(air_res+roll_ress+roll_ress_hill);
+        }
+        public double Force_Required_For_Accelaration_M(int gear)
+        {
+            double air_res = AirResistances_M[gear];
+            double roll_ress = Rolling_resistance;
+            double roll_ress_hill = Rolling_resistance_on_a_hill;
+            double force_of_whill = Force_of_the_Wheels_M[gear];
+            return force_of_whill - (air_res + roll_ress + roll_ress_hill);
+        }
+        public void Calculate_Forces_Required_For_Accelaration_P()
+        {
+            for (int i = 0; i < AirResistances_P.Count; i++)
+            {
+                var force = Force_Required_For_Accelaration_P(i);
+                ForcesRequiredForAccelaration_P.Add(force);
+            }
+        }
+        public void Calculate_Forces_Required_For_Accelaration_M()
+        {
+            for (int i = 0; i < AirResistances_M.Count; i++)
+            {
+                var force = Force_Required_For_Accelaration_M(i);
+                ForcesRequiredForAccelaration_M.Add(force);
+            }
+        }
+        public List<double> Accelarations_On_The_Hill_P { get; set; }
+        public List<double> Accelarations_On_The_Hill_M { get; set; }
+        public double Acceleration_On_The_Hill(double ForcesRequiredForAccelaration)
+        {
+            return ForcesRequiredForAccelaration/(Max_Weight*Reduction_constant_of_rotating_masses);
+        }
+        public void Calculate_Acceleration_On_The_Hill_M()
+        {
+            for (int i = 0; i < ForcesRequiredForAccelaration_M.Count; i++)
+            {
+                var acc = Acceleration_On_The_Hill(ForcesRequiredForAccelaration_M[i]);
+                Accelarations_On_The_Hill_M.Add(acc);
+            }
+        }
+        public void Calculate_Acceleration_On_The_Hill_P()
+        {
+            for (int i = 0; i < ForcesRequiredForAccelaration_P.Count; i++)
+            {
+                var acc = Acceleration_On_The_Hill(ForcesRequiredForAccelaration_P[i]);
+                Accelarations_On_The_Hill_P.Add(acc);
+            }
+        }
+        public List<double> Dynamic_Factors { get; set; }
+        public double Dynamic_Factor(double ForcesRequiredForAccelaration, double AirResistances)
+        {
+            return (ForcesRequiredForAccelaration-AirResistances) / (Max_Weight * G); ;
+        }
+        public void Calculate_Dynamic_Factors()
+        {
+            for (int i = 0; i < ForcesRequiredForAccelaration_P.Count; i++)
+            {
+                var dyna = Dynamic_Factor(ForcesRequiredForAccelaration_P[i], AirResistances_P[i]);
+                Dynamic_Factors.Add(dyna);
+            }
+        }
     }
 }
