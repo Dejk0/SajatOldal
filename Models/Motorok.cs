@@ -19,7 +19,7 @@ namespace SajatOldalProba.Models
         public int Width { get; set; }
         public int Hight { get; set; }
         public int Wheelbase { get; set; }
-        public int[]? Gauge { get; set; }
+        public int Gauge { get; set; }
         public string? Tire { get; set; }
         public double Drag_coefficient { get; set; }
         public double Rolling_Resistance_Factor { get; set; }
@@ -71,7 +71,7 @@ namespace SajatOldalProba.Models
         }
         public void Calculate_P_M_Max()
         {
-            P_M_Max = M_max * Calculate_ford_to_Radsec(n_pn_max)/1000;
+            P_M_Max = M_max * Calculate_ford_to_Radsec(n_M_max)/1000;
         }
         public List<double> Speed_of_the_Wheels_P { get; set; }
         public List<double> Speed_of_the_Wheels_M { get; set; }
@@ -89,7 +89,7 @@ namespace SajatOldalProba.Models
             for (int i = 0; i < Transmissions.Count; i++) 
             {
                 var n = Calculate_Speed_of_the_wheel(n_pn_max, Transmissions[i]);
-                Speed_of_the_Wheels_P.Add(n);
+                Speed_of_the_Wheels_P.Add(MeterminuteToKmhour(n));
             }
         }
         public void Calculate_Speed_of_the_wheels_M()
@@ -97,7 +97,7 @@ namespace SajatOldalProba.Models
             for (int i = 0; i < Transmissions.Count; i++)
             {
                 var n = Calculate_Speed_of_the_wheel(n_M_max, Transmissions[i]);
-                Speed_of_the_Wheels_M.Add(n);
+                Speed_of_the_Wheels_M.Add(MeterminuteToKmhour(n));
             }
         }
         public List<double> Force_of_the_Wheels_P { get; set; }
@@ -110,7 +110,7 @@ namespace SajatOldalProba.Models
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Force_of_the_wheel(P_M_Max, Transmissions[i]);
+                var n = Calculate_Force_of_the_wheel(M_P_Max, Transmissions[i]);
                 Force_of_the_Wheels_P.Add(n);
             }
         }
