@@ -160,7 +160,8 @@ namespace SajatOldalProba.Models
         }
         public double Calculate_AirResistance(double speed_of_the_wheels)
         {
-            return (0.5 * Cross_Section * Drag_coefficient * AirDensity * ((speed_of_the_wheels/60)*(speed_of_the_wheels/60))/1000000);
+            var velocity = (speed_of_the_wheels / 60)/1000; // m/s
+            return (0.5 * Cross_Section * Drag_coefficient * AirDensity * ((speed_of_the_wheels)*(speed_of_the_wheels)));
         }
         public void Calculate_AirResistanceses_P()
         {
@@ -184,7 +185,7 @@ namespace SajatOldalProba.Models
         {
             double air_res=AirResistances_P[gear];
             double a_ress = Ascent_resistance;
-            double roll_ress_hill = Rolling_resistance_on_a_hill; 
+            double roll_ress_hill = Rolling_resistance;
             double force_of_whill = Force_of_the_Wheels_P[gear];
             return force_of_whill-(air_res+a_ress+roll_ress_hill);
         }
@@ -192,7 +193,7 @@ namespace SajatOldalProba.Models
         {
             double air_res = AirResistances_M[gear];
             double a_ress = Ascent_resistance;
-            double roll_ress_hill = Rolling_resistance_on_a_hill;
+            double roll_ress_hill = Rolling_resistance;
             double force_of_whill = Force_of_the_Wheels_M[gear];
             return force_of_whill - (air_res + a_ress + roll_ress_hill);
         }
@@ -241,7 +242,7 @@ namespace SajatOldalProba.Models
         }
         public void Calculate_Dynamic_Factors()
         {
-            for (int i = 0; i < ForcesRequiredForAccelaration_P.Count; i++)
+            for (int i = 0; i < Force_of_the_Wheels_P.Count; i++)
             {
                 var dyna = Dynamic_Factor(Force_of_the_Wheels_P[i], AirResistances_P[i]);
                 Dynamic_Factors.Add(dyna);
