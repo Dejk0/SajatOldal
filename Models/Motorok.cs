@@ -161,7 +161,7 @@ namespace SajatOldalProba.Models
         public double Calculate_AirResistance(double speed_of_the_wheels)
         {
             var velocity = (speed_of_the_wheels / 60)/1000; // m/s
-            return (0.5 * Cross_Section * Drag_coefficient * AirDensity * ((speed_of_the_wheels)*(speed_of_the_wheels)));
+            return (0.5 * Cross_Section * Drag_coefficient * AirDensity * ((velocity)*(velocity)));
         }
         public void Calculate_AirResistanceses_P()
         {
