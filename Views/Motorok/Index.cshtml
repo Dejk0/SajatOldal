@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Motorok";
 }
 @model SajatOldalProba.Models.Motorok
@@ -8,26 +7,26 @@
 
 <form asp-controller="Motorok" asp-action="Results" method="post">
     <div style="overflow-y: auto; max-height: 80vh;">
-    <table>
-        <thead>
-            <tr>
-                <th>Paraméter</th>
-                <th>Érték</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Pn max (kW)</td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Paraméter</th>
+                    <th>Érték</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pn max (kW)</td>
                     <td><input asp-for="Pn_max" class="form-control" value="92" /></td>
-            </tr>
-            <tr>
-                <td>n Pmax (1/min)</td>
-                    <td><input asp-for="n_pn_max" class="form-control"  value="5800" /></td>
-            </tr>
-            <tr>
-                <td>Mmax (kW)</td>
+                </tr>
+                <tr>
+                    <td>n Pmax (1/min)</td>
+                    <td><input asp-for="n_pn_max" class="form-control" value="5800" /></td>
+                </tr>
+                <tr>
+                    <td>Mmax (kW)</td>
                     <td><input asp-for="M_max" class="form-control" value="182" /></td>
-            </tr>
+                </tr>
                 <tr>
                     <td>n Mmax (1/min)</td>
                     <td><input asp-for="n_M_max" class="form-control" value="3500" /></td>
@@ -120,12 +119,16 @@
                     <td>Creep Factor</td>
                     <td><input asp-for="Creep_factor" class="form-control" value="0,94" /></td>
                 </tr>
-                   
-        </tbody>
-    </table>
-    
-    <div>
-        <button type="Results">Számítás</button>
-    </div>
+                <tr>
+                    <td>Levegő sürűség</td>
+                    <td><input asp-for="AirDensity" class="form-control" value="1,23" /></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div>
+            <button type="Results">Számítás</button>
+        </div>
     </div>
 </form>

@@ -41,7 +41,12 @@ namespace SajatOldalProba.Models
             ForcesRequiredForAccelaration_M = new List<double>();
             Accelarations_On_The_Hill_P = new List<double>();
             Accelarations_On_The_Hill_M = new List<double>();   
-            Dynamic_Factors = new List<double>();   
+            Dynamic_Factors = new List<double>(); 
+            ForceAgistTheCar_M = new List<double>();
+            ForceAgistTheCar_P = new List<double>();
+            Speed_In_Kmperh_M = new List<double>();
+            Speed_In_Kmperh_P = new List<double>();
+
         }
         public double Wheel_radius { get; set; }
 
@@ -89,7 +94,7 @@ namespace SajatOldalProba.Models
             for (int i = 0; i < Transmissions.Count; i++) 
             {
                 var n = Calculate_Speed_of_the_wheel(n_pn_max, Transmissions[i]);
-                Speed_of_the_Wheels_P.Add(MeterminuteToKmhour(n));
+                Speed_of_the_Wheels_P.Add(n);
             }
         }
         public void Calculate_Speed_of_the_wheels_M()
@@ -97,7 +102,7 @@ namespace SajatOldalProba.Models
             for (int i = 0; i < Transmissions.Count; i++)
             {
                 var n = Calculate_Speed_of_the_wheel(n_M_max, Transmissions[i]);
-                Speed_of_the_Wheels_M.Add(MeterminuteToKmhour(n));
+                Speed_of_the_Wheels_M.Add(n);
             }
         }
         public List<double> Force_of_the_Wheels_P { get; set; }
@@ -155,7 +160,7 @@ namespace SajatOldalProba.Models
         }
         public double Calculate_AirResistance(double speed_of_the_wheels)
         {
-            return 0.5 * Cross_Section * Drag_coefficient * AirDensity * (speed_of_the_wheels*speed_of_the_wheels);
+            return (0.5 * Cross_Section * Drag_coefficient * AirDensity * ((speed_of_the_wheels/60)*(speed_of_the_wheels/60))/1000000);
         }
         public void Calculate_AirResistanceses_P()
         {
@@ -178,18 +183,18 @@ namespace SajatOldalProba.Models
         public double Force_Required_For_Accelaration_P(int gear)
         {
             double air_res=AirResistances_P[gear];
-            double roll_ress = Rolling_resistance;
-            double roll_ress_hill = Rolling_resistance_on_a_hill;
+            double a_ress = Ascent_resistance;
+            double roll_ress_hill = Rolling_resistance_on_a_hill; 
             double force_of_whill = Force_of_the_Wheels_P[gear];
-            return force_of_whill-(air_res+roll_ress+roll_ress_hill);
+            return force_of_whill-(air_res+a_ress+roll_ress_hill);
         }
         public double Force_Required_For_Accelaration_M(int gear)
         {
             double air_res = AirResistances_M[gear];
-            double roll_ress = Rolling_resistance;
+            double a_ress = Ascent_resistance;
             double roll_ress_hill = Rolling_resistance_on_a_hill;
             double force_of_whill = Force_of_the_Wheels_M[gear];
-            return force_of_whill - (air_res + roll_ress + roll_ress_hill);
+            return force_of_whill - (air_res + a_ress + roll_ress_hill);
         }
         public void Calculate_Forces_Required_For_Accelaration_P()
         {
@@ -238,10 +243,44 @@ namespace SajatOldalProba.Models
         {
             for (int i = 0; i < ForcesRequiredForAccelaration_P.Count; i++)
             {
-                var dyna = Dynamic_Factor(ForcesRequiredForAccelaration_P[i], AirResistances_P[i]);
+                var dyna = Dynamic_Factor(Force_of_the_Wheels_P[i], AirResistances_P[i]);
                 Dynamic_Factors.Add(dyna);
             }
         }
+        public List<double> ForceAgistTheCar_P { get; set; }
+        public List<double> ForceAgistTheCar_M { get; set; }
+        public List<double> Speed_In_Kmperh_P { get; set; }
+        public List<double> Speed_In_Kmperh_M { get; set; }
+
+        public void ConertTheLists()
+        {
+            Speed_In_Kmperh_M = ConvertThelistToKmperh(Speed_of_the_Wheels_M);
+            Speed_In_Kmperh_P = ConvertThelistToKmperh(Speed_of_the_Wheels_P);
+        }
+        public List<double> ConvertThelistToKmperh(List<double> speedlist)
+        {
+            var list = new List<double>();
+            for (int i = 0; i < speedlist.Count; i++)
+            {
+                list.Add(MeterminuteToKmhour(speedlist[i]));
+            } 
+            return list;
+        }
+        public void CalculateTheForecAgistTheCar()
+        {
+            ForceAgistTheCar_P = SummTheForces(AirResistances_P);
+            ForceAgistTheCar_M = SummTheForces(AirResistances_M);
+        }
+        public List <double> SummTheForces(List<double> forceList)
+        {
+            var list = new List<double>();
+            for (int i = 0; i < forceList.Count; i++)
+            {
+                list.Add(forceList[i] + Ascent_resistance+Rolling_resistance);
+            }
+            return list;
+        }
+        
         public void Calculate()
         {
             Calculate_Wheel_radius();
@@ -262,6 +301,8 @@ namespace SajatOldalProba.Models
             Calculate_Acceleration_On_The_Hill_P();
             Calculate_Acceleration_On_The_Hill_M();
             Calculate_Dynamic_Factors();
+            ConertTheLists();
+            CalculateTheForecAgistTheCar();
         }
     }
 }
