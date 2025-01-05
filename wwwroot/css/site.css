@@ -1,10 +1,17 @@
+
 html, body {
     font-size: 14px;
-    background: linear-gradient(33deg, black, red);
+   
     min-height: 100%;
     margin: 0;
     padding: 0;
     color: white;
+}
+body {
+    background-color: transparent;
+}
+html {
+    background-color: #DCCCB6;
 }
 
 .header {
@@ -56,6 +63,19 @@ html, body {
     color: black;
     flex: 1 1 300px;
     margin-bottom: 3px;
+
+}
+.data-section {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #d4f4d4;
+    color: black;
+    flex: 1 1 300px;
+    margin-bottom: 3px;
+    padding: 30px;
+    overflow-y: auto;
+    border-radius: 15px;
+    margin: 2px;
 }
 
 .white-section {

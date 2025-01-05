@@ -1,7 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata;
 using System.Transactions;
+using System.ComponentModel.DataAnnotations;
 
 namespace SajatOldalProba.Models
 {
@@ -58,11 +60,15 @@ namespace SajatOldalProba.Models
 
             double[] tire_data = new double[]
             {
-                float.Parse(per[0]), 
-                float.Parse(per[1]), 
-                float.Parse(tire[2]) 
+                double.Parse(per[0]), 
+                double.Parse(per[1]), 
+                double.Parse(tire[2]) 
             };
             Wheel_radius = (((tire_data[2]* 25.4)/2) + tire_data[0] * tire_data[1] / 100) * Creep_factor;
+            while (Wheel_radius > 1000)
+            {
+                Wheel_radius = Wheel_radius/10;
+            }
         }
         public double M_P_Max { get; set; }
         public void Calculate_M_P_Max()
@@ -93,6 +99,7 @@ namespace SajatOldalProba.Models
         {
             for (int i = 0; i < Transmissions.Count; i++) 
             {
+                
                 var n = Calculate_Speed_of_the_wheel(n_pn_max, Transmissions[i]);
                 Speed_of_the_Wheels_P.Add(n);
             }
@@ -252,7 +259,6 @@ namespace SajatOldalProba.Models
         public List<double> ForceAgistTheCar_M { get; set; }
         public List<double> Speed_In_Kmperh_P { get; set; }
         public List<double> Speed_In_Kmperh_M { get; set; }
-
         public void ConertTheLists()
         {
             Speed_In_Kmperh_M = ConvertThelistToKmperh(Speed_of_the_Wheels_M);

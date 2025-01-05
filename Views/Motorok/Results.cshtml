@@ -4,158 +4,249 @@
 
 @model SajatOldalProba.Models.Motorok
 
-<h2>Eredmények</h2>
-
-<h3>Kerék sugara</h3>
-<ul>
-        <li>@Math.Round(Model.Wheel_radius,3) mm</li>
-</ul>
-
-<h3>Jármű sebessége P maxnál</h3>
-<ul>
-    @foreach (var item in Model.Speed_In_Kmperh_P)
-    {
-        <li>@Math.Round(item, 3) km/h</li>
-    }
-</ul>
-<h3>Jármű sebessége M maxnál</h3>
-<ul>
-    @foreach (var item in Model.Speed_In_Kmperh_M)
-    {
-        <li>@Math.Round(item, 3) km/h</li>
-    }
-</ul>
-
-<h3>Kerékerő P maxnál</h3>
-<ul>
-    @foreach (var item in Model.Force_of_the_Wheels_P)
-    {
-        <li>@Math.Round(item, 3) N</li>
-    }
-</ul>
-<h3>Kerékerő M maxnál</h3>
-<ul>
-    @foreach (var item in Model.Force_of_the_Wheels_M)
-    {
-        <li>@Math.Round(item, 3) N</li>
-    }
-</ul>
-<h3>Légellenállás P maxnál</h3>
-<ul>
-    @foreach (var item in Model.AirResistances_P)
-    {
-        <li>@Math.Round(item, 3) N</li>
-    }
-</ul>
-<h3>Légellenállás M maxnál</h3>
-<ul>
-    @foreach (var item in Model.AirResistances_M)
-    {
-        <li>@Math.Round(item, 3) N</li>
-    }
-</ul>
-<h3>Gyorsuláshoz szükséges erő P maxnál</h3>
-<ul>
-    @foreach (var item in Model.ForcesRequiredForAccelaration_P)
-    {
-        <li>@Math.Round(item, 3) N</li>
-    }
-</ul>
-<h3>Gyorsuláshoz szükséges erő M maxnál</h3>
-<ul>
-    @foreach (var item in Model.ForcesRequiredForAccelaration_M)
-    {
-        <li>@Math.Round(item, 3) N</li>
-    }
-</ul>
-<h3>Gyorsulás az emelkedőn P maxnál</h3>
-<ul>
-    @foreach (var item in Model.Accelarations_On_The_Hill_P)
-    {
-        <li>@Math.Round(item, 3) m/s^2</li>
-    }
-</ul>
-<h3>Gyorsulás az emelkedőn M maxnál</h3>
-<ul>
-    @foreach (var item in Model.Accelarations_On_The_Hill_M)
-    {
-        <li>@Math.Round(item, 3) m/s^2</li>
-    }
-</ul>
-<h3>Dinamikus hatás</h3>
-<ul>
-    @foreach (var item in Model.Dynamic_Factors)
-    {
-        <li>@item</li>
-    }
-</ul>
-<div class="container">
-    <h2>Eredmények Grafikon</h2>
-    <canvas id="resultsChart" width="400" height="200"></canvas>
+<div class="green-section">
+    <h2>Eredmények</h2>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('resultsChart').getContext('2d');
+<div class="green-section">
+    <div class="container">
+        <h2>P max</h2>
+        <canvas id="results2Chart" width="400" height="200"></canvas>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('results2Chart').getContext('2d');
 
-        // Adatok a controller-ből
-        const labels = @Html.Raw(Json.Serialize(Model.Speed_In_Kmperh_M)); // X tengely értékek
-        const data1 = @Html.Raw(Json.Serialize(Model.Force_of_the_Wheels_M)); // Y tengely értékek
-        const data2 = @Html.Raw(Json.Serialize(Model.AirResistances_M));
-        const data3 = @Html.Raw(Json.Serialize(Model.ForceAgistTheCar_M));
+            const labels = @Html.Raw(Json.Serialize(Model.Speed_In_Kmperh_P));
+            const data1 = @Html.Raw(Json.Serialize(Model.Force_of_the_Wheels_P));
+            const data2 = @Html.Raw(Json.Serialize(Model.AirResistances_P));
+            const data3 = @Html.Raw(Json.Serialize(Model.ForceAgistTheCar_P));
 
-        // Grafikon létrehozása
-        new Chart(ctx, {
-            type: 'line', // Vonalas grafikon
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Kerék erő',
-                        data: data1,
-                        borderColor: 'blue',
-                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Légellenállás + gördülési ellenállás',
-                        data: data2,
-                        borderColor: 'red',
-                        backgroundColor: 'rgba(255, 0, 0, 0.1)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Légellenállás + gördülési ellenállás + emelkedési ellenállás',
-                        data: data3,
-                        borderColor: 'blue',
-                        backgroundColor: 'rgba( 0, 255, 0, 0.1)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    }
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Kerék erő',
+                            data: data1,
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Légellenállás + gördülési ellenállás',
+                            data: data2,
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Légellenállás + gördülési ellenállás + emelkedési ellenállás',
+                            data: data3,
+                            borderColor: 'green',
+                            backgroundColor: 'rgba( 0, 255, 0, 0.1)',
+                            borderWidth: 2
+                        }
+                    ]
                 },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Speed (km/h)'
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
                         }
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Force N'
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Speed (km/h)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Force N'
+                            }
                         }
                     }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
+</div>
+<div class="green-section">
+    <div class="container">
+        <h2>M max</h2>
+        <canvas id="resultsChart" width="400" height="200"></canvas>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('resultsChart').getContext('2d');
 
-<!-- Add similar sections for other lists -->
+            const labels = @Html.Raw(Json.Serialize(Model.Speed_In_Kmperh_M));
+            const data1 = @Html.Raw(Json.Serialize(Model.Force_of_the_Wheels_M));
+            const data2 = @Html.Raw(Json.Serialize(Model.AirResistances_M));
+            const data3 = @Html.Raw(Json.Serialize(Model.ForceAgistTheCar_M));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Kerék erő',
+                            data: data1,
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Légellenállás + gördülési ellenállás',
+                            data: data2,
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Légellenállás + gördülési ellenállás + emelkedési ellenállás',
+                            data: data3,
+                            borderColor: 'green',
+                            backgroundColor: 'rgba( 0, 255, 0, 0.1)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Speed (km/h)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Force N'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</div>
+<div class="data-section">    
+    <div class="white-section">
+        <h3>Kerék sugara</h3>
+        <ul>
+            <li>@Math.Round(Model.Wheel_radius, 3) mm</li>
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Jármű sebessége P maxnál</h3>
+        <ul>
+            @foreach (var item in Model.Speed_In_Kmperh_P)
+            {
+                <li>@Math.Round(item, 3) km/h</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Jármű sebessége M maxnál</h3>
+        <ul>
+            @foreach (var item in Model.Speed_In_Kmperh_M)
+            {
+                <li>@Math.Round(item, 3) km/h</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Kerékerő P maxnál</h3>
+        <ul>
+            @foreach (var item in Model.Force_of_the_Wheels_P)
+            {
+                <li>@Math.Round(item, 3) N</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Kerékerő M maxnál</h3>
+        <ul>
+            @foreach (var item in Model.Force_of_the_Wheels_M)
+            {
+                <li>@Math.Round(item, 3) N</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Légellenállás P maxnál</h3>
+        <ul>
+            @foreach (var item in Model.AirResistances_P)
+            {
+                <li>@Math.Round(item, 3) N</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Légellenállás M maxnál</h3>
+        <ul>
+            @foreach (var item in Model.AirResistances_M)
+            {
+                <li>@Math.Round(item, 3) N</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Gyorsuláshoz szükséges erő P maxnál</h3>
+        <ul>
+            @foreach (var item in Model.ForcesRequiredForAccelaration_P)
+            {
+                <li>@Math.Round(item, 3) N</li>
+            }
+        </ul>
+    </div>
+    <div class ="white-section">
+        <h3>Gyorsuláshoz szükséges erő M maxnál</h3>
+        <ul>
+            @foreach (var item in Model.ForcesRequiredForAccelaration_M)
+            {
+                <li>@Math.Round(item, 3) N</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Gyorsulás az emelkedőn P maxnál</h3>
+        <ul>
+            @foreach (var item in Model.Accelarations_On_The_Hill_P)
+            {
+                <li>@Math.Round(item, 3) m/s^2</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Gyorsulás az emelkedőn M maxnál</h3>
+        <ul>
+            @foreach (var item in Model.Accelarations_On_The_Hill_M)
+            {
+                <li>@Math.Round(item, 3) m/s^2</li>
+            }
+        </ul>
+    </div>
+    <div class="white-section">
+        <h3>Dinamikus hatás</h3>
+        <ul>
+            @foreach (var item in Model.Dynamic_Factors)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+</div>
