@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SajatOldalProba.Controllers
+namespace SajatOldal.Controllers
 {
     public class Motorok : Controller
     {
@@ -12,7 +12,7 @@ namespace SajatOldalProba.Controllers
         }
         // GET: Motorok/Result
         [HttpPost]
-        public IActionResult Results(Models.Motorok model)
+        public IActionResult Results(Models.Motorok.Motorok model)
         {
 
             //TransmissionsValidation(model);
@@ -23,7 +23,7 @@ namespace SajatOldalProba.Controllers
             model.Calculate();
             return View("Results",model);
         }
-        public void TransmissionsValidation(Models.Motorok model)
+        public void TransmissionsValidation(Models.Motorok.Motorok model)
         {
 
             for (int i = 0; i < model.Transmissions.Count; i++) 

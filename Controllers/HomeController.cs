@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SajatOldalProba.Models;
 
-namespace SajatOldalProba.Controllers
+namespace SajatOldal.Controllers
 {
     public class HomeController : Controller
     {

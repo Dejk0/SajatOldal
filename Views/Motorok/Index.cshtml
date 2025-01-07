@@ -1,8 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Motorok";
-}
-@model SajatOldalProba.Models.Motorok
+    ViewData["Title"] = "Motorok"; 
 
+}
+
+@model SajatOldal.Models.Motorok.Motorok
 
 
 <form asp-controller="Motorok" asp-action="Results" method="post">
@@ -26,27 +27,27 @@
             </thead>            
             <tbody>                
                 <tr>
-                    <td>Pn max (kW)</td>
+                    <td>Maximum teljesítmény (kW)</td>
                     <td><input asp-for="Pn_max" class="form-control" value="92" /></td>
                 </tr>
                 <tr>
-                    <td>n Pmax (1/min)</td>
+                    <td>Fordulatszám maximum teljesítménynél (1/min)</td>
                     <td><input asp-for="n_pn_max" class="form-control" value="5800" /></td>
                 </tr>
                 <tr>
-                    <td>Mmax (kW)</td>
+                    <td>Maximum nyomaték (kW)</td>
                     <td><input asp-for="M_max" class="form-control" value="182" /></td>
                 </tr>
                 <tr>
-                    <td>n Mmax (1/min)</td>
+                    <td>Fordulatszám Maximum nyomatéknál (1/min)</td>
                     <td><input asp-for="n_M_max" class="form-control" value="3500" /></td>
                 </tr>
                 <tr>
-                    <td>Weight (kg)</td>
+                    <td>Súly (kg)</td>
                     <td><input asp-for="Weight" class="form-control" value="1365" /></td>
                 </tr>
                 <tr>
-                    <td>Max Weight (kg)</td>
+                    <td>Max súly (kg)</td>
                     <td><input asp-for="Max_Weight" class="form-control" value="1850" /></td>
                 </tr>
                 <tr>
@@ -83,23 +84,23 @@
                     <span asp-validation-for="Transmissions[5]" class="text-danger"></span>
                 </tr>
                 <tr>
-                    <td>Gear Ratio</td>
+                    <td>Állandó áttétel</td>
                     <td><input asp-for="Gear_ratio" class="form-control" value="3,92" /></td>
                 </tr>
                 <tr>
-                    <td>Length (mm)</td>
+                    <td>Hossz (mm)</td>
                     <td><input asp-for="Length" class="form-control" value="4744" /></td>
                 </tr>
                 <tr>
-                    <td>Width (mm)</td>
+                    <td>Szélesség (mm)</td>
                     <td><input asp-for="Width" class="form-control" value="1760" /></td>
                 </tr>
                 <tr>
-                    <td>Height (mm)</td>
+                    <td>Magassság (mm)</td>
                     <td><input asp-for="Hight" class="form-control" value="1440" /></td>
                 </tr>
                 <tr>
-                    <td>Wheelbase (mm)</td>
+                    <td>Tengelytáv (mm)</td>
                     <td><input asp-for="Wheelbase" class="form-control" value="2761" /></td>
                 </tr>
                 <tr>
@@ -107,39 +108,39 @@
                     <td><input asp-for="Gauge" class="form-control" value="2761" /></td>
                 </tr>
                 <tr>
-                    <td>Tire</td>
+                    <td>Gumi leírás</td>
                     <td><input asp-for="Tire" class="form-control" value="195/70 R 15" /></td>
                 </tr>
                 <tr>
-                    <td>Drag Coefficient</td>
+                    <td>Légellenállási tényező (-)</td>
                     <td><input asp-for="Drag_coefficient" class="form-control" value="0,32" /></td>
                 </tr>
                 <tr>
-                    <td>Rolling Resistance Factor</td>
+                    <td>Gördülési ellenállás tényező (-)</td>
                     <td><input asp-for="Rolling_Resistance_Factor" class="form-control" value="0,015" /></td>
                 </tr>
                 <tr>
-                    <td>Transmission Efficiency</td>
+                    <td>Áttétel hatásfoka (-)</td>
                     <td><input asp-for="Transmission_efficiency" class="form-control" value="0,92" /></td>
                 </tr>
                 <tr>
-                    <td>Reduction Constant of Rotating Masses</td>
+                    <td>Forgó tömegek redukciós állandója (-)</td>
                     <td><input asp-for="Reduction_constant_of_rotating_masses" class="form-control" value="1,2" /></td>
                 </tr>
                 <tr>
-                    <td>Slope of Rise (%)</td>
+                    <td>Emelkedő (%)</td>
                     <td><input asp-for="Slope_of_rise" class="form-control" value="13" /></td>
                 </tr>
                 <tr>
-                    <td>Adhesion Factor</td>
+                    <td>Tapadási tényező (-)</td>
                     <td><input asp-for="Adhesion_factor" class="form-control" value="0,8" /></td>
                 </tr>
                 <tr>
-                    <td>Creep Factor</td>
+                    <td>Belapulási tényező (-)</td>
                     <td><input asp-for="Creep_factor" class="form-control" value="0,94" /></td>
                 </tr>
                 <tr>
-                    <td>Levegő sürűség</td>
+                    <td>Levegő sürűség (kg/m^3)</td>
                     <td><input asp-for="AirDensity" class="form-control" value="1,23" /></td>
                 </tr>
 
