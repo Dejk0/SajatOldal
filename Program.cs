@@ -42,6 +42,7 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGet("/Identity/Account/Register", async context =>
@@ -59,7 +60,6 @@ app.UseEndpoints(endpoints =>
 });
 
 
-app.UseAuthorization();
 
 app.MapStaticAssets();
 
