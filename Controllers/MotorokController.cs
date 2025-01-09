@@ -67,7 +67,6 @@ namespace SajatOldal.Controllers
                 motorok.Calculate();
             _context.Add(motorok);
             await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
                 return await Details(motorok.Id);
             }            
             return View("Create2",motorok);
