@@ -9,5 +9,7 @@ namespace SajatOldalProba.Data
             : base(options)
         {
         }
+        public DbSet<SajatOldal.Models.Motorok.Motorok> Services { get; set; }
+
     }
 }

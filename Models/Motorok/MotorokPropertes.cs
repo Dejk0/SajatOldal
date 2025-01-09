@@ -1,14 +1,44 @@
-﻿namespace SajatOldal.Models.Motorok
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
+using Microsoft.IdentityModel.Tokens;
+using SajatOldal.Models.Motorok;
+
+namespace SajatOldal.Models.Motorok
 {
-    public class MotorokPropertes
+    public class MotorokPropertes 
     {
+        [Key]
+        public Guid Id { get; set; }
         public double Pn_max { get; set; }
         public double n_pn_max { get; set; }
         public double M_max { get; set; }
         public double n_M_max { get; set; }
-        public int Weight { get; set; }
+        [Range(0, 100000, ErrorMessage = "Szám kell")]
+        public double Weight { get; set; }
+        
         public int Max_Weight { get; set; }
+        
         public List<double> Transmissions { get; set; }
+        [RegularExpression(@"^(10|[0-9](,\d{1,100})?)$", ErrorMessage = "A számnak 0 és 10 között kell lennie, és a tizedesjegyeket ',' karakterrel kell elválasztani.")]
+        public string? Transmisson_1 { get; set; }
+        [RegularExpression(@"^(10|[0-9](,\d{1,100})?)$", ErrorMessage = "A számnak 0 és 10 között kell lennie, és a tizedesjegyeket ',' karakterrel kell elválasztani.")]
+
+        public string? Transmisson_2 { get; set; }
+        [RegularExpression(@"^(10|[0-9](,\d{1,100})?)$", ErrorMessage = "A számnak 0 és 10 között kell lennie, és a tizedesjegyeket ',' karakterrel kell elválasztani.")]
+
+        public string? Transmisson_3 { get; set; }
+        [RegularExpression(@"^(10|[0-9](,\d{1,100})?)$", ErrorMessage = "A számnak 0 és 10 között kell lennie, és a tizedesjegyeket ',' karakterrel kell elválasztani.")]
+
+        public string? Transmisson_4 { get; set; }
+        [RegularExpression(@"^(10|[0-9](,\d{1,100})?)$", ErrorMessage = "A számnak 0 és 10 között kell lennie, és a tizedesjegyeket ',' karakterrel kell elválasztani.")]
+
+        public string? Transmisson_5 { get; set; }
+        [RegularExpression(@"^(10|[0-9](,\d{1,100})?)$", ErrorMessage = "A számnak 0 és 10 között kell lennie, és a tizedesjegyeket ',' karakterrel kell elválasztani.")]
+
+        public string? Transmisson_6 { get; set; }
+        public string CarName { get; set; }
+
         public double Gear_ratio { get; set; }
         public int Length { get; set; }
         public int Width { get; set; }
@@ -47,5 +77,7 @@
         public List<double> ForceAgistTheCar_M { get; set; }
         public List<double> Speed_In_Kmperh_P { get; set; }
         public List<double> Speed_In_Kmperh_M { get; set; }
+
+       
     }
 }

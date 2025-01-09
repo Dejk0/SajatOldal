@@ -2,6 +2,37 @@
 {
     public class MotorokMethods : MotorokPropertes
     {
+        
+
+        public void SetupUpTheTransmissionsList()
+        {
+            if (double.TryParse(Transmisson_1, out double value1) && value1!= 0)
+            {
+                Transmissions.Add(value1);
+            }
+            if (double.TryParse(Transmisson_2, out double value2) && value2 != 0)
+            {
+                Transmissions.Add(value2);
+            }
+            if (double.TryParse(Transmisson_3, out double value3) && value3 != 0)
+            {
+                Transmissions.Add(value3);
+            }
+            if (double.TryParse(Transmisson_4, out double value4) && value4 != 0)
+            {
+                Transmissions.Add(value4);
+            }
+            if (double.TryParse(Transmisson_5, out double value5) && value5 != 0)
+            {
+                Transmissions.Add(value5);
+            }
+            if (double.TryParse(Transmisson_6, out double value6) && value6 != 0)
+            {
+                Transmissions.Add(value6);
+            }
+        }
+
+      
         public void Calculate_Wheel_radius()
         {
 
@@ -48,8 +79,7 @@
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-
-                var n = Calculate_Speed_of_the_wheel(n_pn_max, Transmissions[i]);
+                var n = Calculate_Speed_of_the_wheel(n_pn_max, ( Transmissions[i]));
                 Speed_of_the_Wheels_P.Add(n);
             }
         }
@@ -57,7 +87,7 @@
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Speed_of_the_wheel(n_M_max, Transmissions[i]);
+                var n = Calculate_Speed_of_the_wheel(n_M_max, (Transmissions[i]));
                 Speed_of_the_Wheels_M.Add(n);
             }
         }
@@ -70,7 +100,7 @@
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Force_of_the_wheel(M_P_Max, Transmissions[i]);
+                var n = Calculate_Force_of_the_wheel(M_P_Max, (Transmissions[i]));
                 Force_of_the_Wheels_P.Add(n);
             }
         }
@@ -78,7 +108,7 @@
         {
             for (int i = 0; i < Transmissions.Count; i++)
             {
-                var n = Calculate_Force_of_the_wheel(M_max, Transmissions[i]);
+                var n = Calculate_Force_of_the_wheel(M_max, (Transmissions[i]));
                 Force_of_the_Wheels_M.Add(n);
             }
         }

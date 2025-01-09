@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata;
 using System.Transactions;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace SajatOldal.Models.Motorok
 {
@@ -12,6 +13,7 @@ namespace SajatOldal.Models.Motorok
         public void Calculate()
         {
             //gyakorlatilag ennél lentebb azért nem lehet bontani mert ez a feladat menete.
+            SetupUpTheTransmissionsList();
             Calculate_Wheel_radius();
             Calculate_M_P_Max();
             Calculate_P_M_Max();
@@ -53,5 +55,6 @@ namespace SajatOldal.Models.Motorok
             Speed_In_Kmperh_P = new List<double>();
 
         }
+        
     }
 }

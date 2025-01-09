@@ -1,0 +1,288 @@
+﻿@model SajatOldal.Models.Motorok.Motorok
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Motorok</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.P_M_Max)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.P_M_Max)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pn_max)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pn_max)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.n_pn_max)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.n_pn_max)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.M_max)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.M_max)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.n_M_max)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.n_M_max)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Max_Weight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Max_Weight)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Transmissions)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Transmissions)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gear_ratio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gear_ratio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hight)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wheelbase)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wheelbase)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gauge)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gauge)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tire)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tire)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Drag_coefficient)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Drag_coefficient)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rolling_Resistance_Factor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rolling_Resistance_Factor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Transmission_efficiency)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Transmission_efficiency)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reduction_constant_of_rotating_masses)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Reduction_constant_of_rotating_masses)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Slope_of_rise)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Slope_of_rise)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adhesion_factor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adhesion_factor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Creep_factor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Creep_factor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wheel_radius)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wheel_radius)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.M_P_Max)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.M_P_Max)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Speed_of_the_Wheels_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Speed_of_the_Wheels_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Speed_of_the_Wheels_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Speed_of_the_Wheels_M)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Force_of_the_Wheels_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Force_of_the_Wheels_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Force_of_the_Wheels_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Force_of_the_Wheels_M)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rolling_resistance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rolling_resistance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.The_hill_on_degree)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.The_hill_on_degree)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rolling_resistance_on_a_hill)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rolling_resistance_on_a_hill)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ascent_resistance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ascent_resistance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AirResistances_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AirResistances_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AirResistances_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AirResistances_M)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AirDensity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AirDensity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cross_Section)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cross_Section)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForcesRequiredForAccelaration_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForcesRequiredForAccelaration_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForcesRequiredForAccelaration_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForcesRequiredForAccelaration_M)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Accelarations_On_The_Hill_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Accelarations_On_The_Hill_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Accelarations_On_The_Hill_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Accelarations_On_The_Hill_M)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dynamic_Factors)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dynamic_Factors)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForceAgistTheCar_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForceAgistTheCar_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForceAgistTheCar_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForceAgistTheCar_M)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Speed_In_Kmperh_P)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Speed_In_Kmperh_P)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Speed_In_Kmperh_M)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Speed_In_Kmperh_M)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
